@@ -17,11 +17,14 @@ let time = 0;
 let timerId = 0;
 let timerOut = true;
 let count=0;
-let match=true;
 const cards=document.querySelectorAll(".card");
+const arrayOfCards=[...cards];
+for(let i=0;i<arrayOfCards.length;i++){
+    console.log(arrayOfCards[i]);
+}
+
 let openCard=[];
 const h=document.getElementById("heart").querySelectorAll(".bi-heart-fill");
-let scount=3;
 const reset = document.querySelector("#restart");
 const timer = document.querySelector("#timer");
 const move=document.querySelector("#moves");
@@ -59,6 +62,9 @@ reset.addEventListener("click", function () {
   }
   count=0;
   move.innerHTML=`${count} moves`;
+  h[2].classList.add("bi-heart-fill"); 
+  h[1].classList.add("bi-heart-fill"); 
+  h[0].classList.add("bi-heart-fill"); 
 });
 
 
