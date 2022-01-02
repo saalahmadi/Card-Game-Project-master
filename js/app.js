@@ -24,12 +24,7 @@ const arrayOfCards = Array.from(cards);
 let orderCards = Array.from(Array(arrayOfCards.length).keys());
 let shuffleCard = [];
 
-const sh = () => {
-  shuffleCard = shuffle(orderCards);
-  arrayOfCards.forEach((c, index) => {
-    c.style.order = orderCards[index];
-  });
-};
+
 let openCard = [];
 const h = document.getElementById("heart").querySelectorAll(".bi-heart-fill");
 const reset = document.querySelector("#restart");
@@ -57,6 +52,13 @@ const stopClock = () => {
   clearInterval(timerId);
 };
 
+const sh = () => {
+    shuffleCard = shuffle(orderCards);
+    arrayOfCards.forEach((c, index) => {
+      c.style.order = orderCards[index];
+    });
+  };
+
 reset.addEventListener("click", function () {
   stopClock();
   timerOut = true;
@@ -64,20 +66,21 @@ reset.addEventListener("click", function () {
   timerCount();
   for (const element of cards) {
     element.classList.remove("open");
+    element.classList.remove("match");
   }
   count = 0;
   move.innerHTML = `${count} moves`;
   h[2].classList.add("bi-heart-fill");
   h[1].classList.add("bi-heart-fill");
   h[0].classList.add("bi-heart-fill");
-  sh();
+ // sh();
 });
 
 //functions
-sh();
+
 for (const card of cards) {
   card.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("open")) {
+    if (!e.target.classList.contains("open")&&e.target.classList.contains("card")) {
       e.target.classList.add("open");
       if (timerOut) {
         initClock();
